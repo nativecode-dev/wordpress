@@ -29,15 +29,7 @@
     "tests"
   ],
   "dependencies": {
-    "protip": "^1.4.1",
-    "jquery": "^2.2.4"
-  },
-  "overrides": {
-    "protip": {
-      "main": [
-        "protip.min.css",
-        "protip.min.js"
-      ]
-    }
+    "jquery": "^2.2.4",
+    "tooltipster": "^3.3.0"
   }
 }

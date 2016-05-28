@@ -1,6 +1,20 @@
 {
+  "autoprefixer": {
+    "options": {
+      "browsers": [
+        "last 3 versions"
+      ]
+    }
+  },
   "bower": {
     "target": "bower.json"
+  },
+  "css": {
+    "clean": {
+      "options": {
+        "keepSpecialComments": 0
+      }
+    }
   },
   "dest": "dist",
   "js": {
@@ -30,6 +44,14 @@
     "globs": [
       "src/**/*.ts"
     ],
+    "lint": {
+      "configuration": {
+        "rules": {
+          "quotemark": [true, "single"]
+        }
+      },
+      "warnings": true
+    },
     "options": {
       "allowJs": true,
       "module": "commonjs",
@@ -49,5 +71,13 @@
       "ignorePath": "../dist/"
     },
     "target": "dist/index.html"
+  },
+  "zip": {
+    "globs": [
+      "dist/**/*.min.css",
+      "dist/**/*.min.js",
+      "dist/**/*.php",
+      "!**/external/**/*"
+    ]
   }
 }
