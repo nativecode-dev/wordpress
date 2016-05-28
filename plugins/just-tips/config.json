@@ -1,0 +1,53 @@
+{
+  "bower": {
+    "target": "bower.json"
+  },
+  "dest": "dist",
+  "js": {
+    "target": "plugin.min.js"
+  },
+  "gulp": {
+    "globs": [
+      "gulpfile.js"
+    ]
+  },
+  "html": {
+    "globs": "src/**/*.html",
+    "target": "src/index.html"
+  },
+  "less": {
+    "globs": [
+      "src/**/*.less"
+    ],
+    "target": "plugin.min.css"
+  },
+  "php": {
+    "globs": [
+      "src/**/*.php"
+    ]
+  },
+  "ts": {
+    "globs": [
+      "src/**/*.ts"
+    ],
+    "options": {
+      "allowJs": true,
+      "module": "commonjs",
+      "target": "es5"
+    },
+    "target": "src/plugin.ts",
+    "typings": {
+      "globs": [
+        "typings/index.d.ts"
+      ],
+      "target": "typings.json"
+    }
+  },
+  "wiredep": {
+    "options": {
+      "directory": "./dist/components",
+      "ignorePath": "../dist/"
+    },
+    "target": "dist/index.html"
+  }
+}

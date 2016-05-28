@@ -1,0 +1,43 @@
+{
+  "name": "just-tips",
+  "description": "Please see the descriptions at https://www.nativecode.com/wordpress.",
+  "main": [
+    "src/plugin.less",
+    "src/plugin.ts"
+  ],
+  "authors": [
+    "support@nativecode.com"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "video",
+    "tooltip",
+    "media",
+    "image",
+    "html",
+    "link"
+  ],
+  "homepage": "https://github.com/nativecode-dev/wordpress",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dist/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "protip": "^1.4.1",
+    "jquery": "^2.2.4"
+  },
+  "overrides": {
+    "protip": {
+      "main": [
+        "protip.min.css",
+        "protip.min.js"
+      ]
+    }
+  }
+}
