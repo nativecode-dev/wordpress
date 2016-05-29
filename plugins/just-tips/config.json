@@ -25,6 +25,20 @@
       }
     }
   },
+  "deployments": {
+    "development": {
+      "globs": [
+        "dist/*.zip"
+      ],
+      "key": "C:\\Users\\mpham\\dev.nativecode.com-deploy.key",
+      "ssh": {
+        "host": "dev.nativecode.com",
+        "path": "/usr/share/sites/com-nativecode-dev/wp-content/plugins/just-tips",
+        "port": 22,
+        "username": "root"
+      }
+    }
+  },
   "dist": "dist",
   "js": {
     "target": "plugin.min.js"
@@ -51,6 +65,9 @@
       "src/**/*.less"
     ],
     "target": "plugin.min.css"
+  },
+  "logs": {
+    "target": "logs"
   },
   "php": {
     "globs": [
@@ -97,8 +114,11 @@
   },
   "zip": {
     "globs": [
-      "dist/**/*.min.css",
-      "dist/**/*.min.js",
+      "dist/just-tips.*.zip"
+    ],
+    "include": [
+      "dist/**/*.css",
+      "dist/**/*.js",
       "dist/**/*.php",
       "!**/external/**/*"
     ]

@@ -1,26 +1,42 @@
+/// <reference path="typings/index.d.ts" />
 'use strict';
 
 var bower = require('gulp-bower'),
   config = JSON.parse(require('fs').readFileSync('config.json')),
+  deploy = config.deployments[process.env.environment || 'development'],
+  $fs = require('fs'),
   gulp = require('gulp'),
+  npm = JSON.parse(require('fs').readFileSync('package.json')),
   merge = require('util-merge'),
   $path = require('path'),
   reporters = require('reporters'),
   use = require('gulp-load-plugins')()
 
-function expand(context, template, options) {
+function $expand(template, context, options) {
   options = merge({
     quote: undefined
   }, options)
   while (template.indexOf('{{') >= 0) {
     template = template.replace(/\{\{([\w,_,-,\.]+)\}\}/g, (item, key) => {
-      if (context[key] instanceof Array) {
-        return context[key].map((value) => '\'' + value + '\'').join(',')
+      var property = context[key]
+      if (property instanceof Array) {
+        return property.map((value) => '\'' + value + '\'').join(',')
+      } else if (property instanceof Function) {
+        return property().map((value) => '\'' + value + '\'').join(',')
       }
-      return context[key] ? context[key] : item
+      return property ? property : item
     })
   }
   return template;
+}
+
+function $ssh() {
+  return use.ssh({
+    ignoreErrors: false,
+    sshConfig: merge(deploy.ssh, {
+      privateKey: $fs.readFileSync(deploy.key).toString()
+    })
+  })
 }
 
 gulp.task('bower', () => {
@@ -57,18 +73,14 @@ gulp.task('php', () => {
   var depends = require('wiredep')()
   function wp_enqueue(path, type) {
     var context = {
-      dependencies: [],
+      dependencies: () => Object.keys(depends.packages[context.name].dependencies),
       filepath: $path.parse(path),
       name: path.split('/')[2],
-      path: path.replace('../', ''),
+      path: path,
       type: type
     }
-    var pack = depends.packages[context.name]
-    if (pack && pack.dependencies) {
-      context.dependencies = Object.keys(pack.dependencies)
-    }
-    return expand(context,
-      'wp_enqueue_{{type}}( \'{{name}}\', plugin_dir_url() . \'{{path}}\', array( {{dependencies}} ), $this->version, \'all\' );', {
+    return $expand('wp_enqueue_{{type}}( \'{{name}}\', plugin_dir_url( __FILE__ ) . \'{{path}}\', array( {{dependencies}} ), $this->version, \'all\' );',
+      context, {
         quote: '\''
       })
   }
@@ -115,15 +127,33 @@ gulp.task('ts:lint', () => {
 })
 
 gulp.task('package', ['shrinkwrap'], () => {
-  var npm = JSON.parse(require('fs').readFileSync('package.json'))
-  return gulp.src(config.zip.globs)
+  return gulp.src(config.zip.include)
     .pipe(use.plumber())
     .pipe(use.zip(npm.name + '.' + npm.version + '.zip'))
     .pipe(gulp.dest(config.dist))
 })
 
+gulp.task('deploy:clean', () => {
+  return $ssh().exec(['rm -rf ' + deploy.ssh.path], { filePath: 'deploy-clean.log' })
+    .pipe(gulp.dest(config.logs.target))
+})
+gulp.task('deploy:files', ['deploy:clean', 'package'], () => {
+  return gulp.src(deploy.globs)
+    .pipe(use.plumber())
+    .pipe($ssh().dest(deploy.ssh.path))
+})
+gulp.task('deploy', ['deploy:files'], () => {
+  return $ssh()
+    .exec([
+      'chown -R www-data:www-data ' + deploy.ssh.path,
+      'unzip -o ' + deploy.ssh.path + '/' + '*.zip -d ' + deploy.ssh.path + '/'
+    ], { filePath: 'deploy-push.log' })
+    .pipe(gulp.dest(config.logs.target))
+})
+
 gulp.task('shrinkwrap', ['build'], () => {
   return gulp.src('package.json')
+    .pipe(use.plumber())
     .pipe(use.shrinkwrap())
     .pipe(gulp.dest('.'))
 })
@@ -136,6 +166,7 @@ gulp.task('clean', () => {
 gulp.task('build', ['bower', 'typings'], () => gulp.start(['wiredep']))
 gulp.task('watch', ['watch:reload'])
 gulp.task('watch:rebuild', ['build'], () => {
+  npm = JSON.parse(require('fs').readFileSync('package.json'))
   config.watchers = [
     gulp.watch(config.globs, ['build']),
     gulp.watch(config.html.globs, ['html']),
@@ -150,7 +181,7 @@ gulp.task('watch:reload', ['watch:rebuild'], () => {
     if (config.spawned) {
       config.spawned.kill()
     }
-    var args = process.argv.slice(1, 2),
+    var options = process.argv.slice(1, 2),
       count = config.watchers ? config.watchers.length - 1 : 0,
       exec = process.argv[0]
 
@@ -160,8 +191,8 @@ gulp.task('watch:reload', ['watch:rebuild'], () => {
     }
     config.watchers = []
 
-    args.push('watch:rebuild')
-    config.spawned = require('child_process').spawn(exec, args, {
+    options.push('watch:rebuild')
+    config.spawned = require('child_process').spawn(exec, options, {
       cwd: process.cwd(),
       stdio: 'inherit'
     })
