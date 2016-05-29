@@ -1,33 +1,50 @@
 {
-  "autoprefixer": {
-    "options": {
-      "browsers": [
-        "last 3 versions"
-      ]
-    }
-  },
   "bower": {
     "target": "bower.json"
   },
+  "clean": {
+    "globs": [
+      "dist",
+      "typings"
+    ],
+    "options": {
+      "force": true
+    }
+  },
   "css": {
+    "autoprefixer": {
+      "options": {
+        "browsers": [
+          "last 3 versions"
+        ]
+      }
+    },
     "clean": {
       "options": {
         "keepSpecialComments": 0
       }
     }
   },
-  "dest": "dist",
+  "dist": "dist",
   "js": {
     "target": "plugin.min.js"
   },
+  "globs": [
+    ".bowerrc",
+    ".npmrc",
+    "bower.json",
+    "config.json",
+    "gulpfile.js",
+    "package.json",
+    "typings.json"
+  ],
   "gulp": {
     "globs": [
       "gulpfile.js"
     ]
   },
   "html": {
-    "globs": "src/**/*.html",
-    "target": "src/index.html"
+    "globs": "src/**/*.html"
   },
   "less": {
     "globs": [
@@ -42,22 +59,28 @@
   },
   "ts": {
     "globs": [
-      "src/**/*.ts"
+      "src/admin/js/**/*.ts",
+      "src/public/js/**/*.ts"
     ],
     "lint": {
       "configuration": {
         "rules": {
-          "quotemark": [true, "single"]
+          "quotemark": [
+            true,
+            "single"
+          ]
         }
       },
       "warnings": true
     },
     "options": {
-      "allowJs": true,
+      "allowJs": false,
       "module": "commonjs",
       "target": "es5"
     },
-    "target": "src/plugin.ts",
+    "target": [
+      "src/**/js/*-{admin,public}.ts"
+    ],
     "typings": {
       "globs": [
         "typings/index.d.ts"

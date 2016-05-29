@@ -2,8 +2,8 @@
   "name": "just-tips",
   "description": "Please see the descriptions at https://www.nativecode.com/wordpress.",
   "main": [
-    "src/plugin.less",
-    "src/plugin.ts"
+    "src/admin/css/just-tips-public.less",
+    "src/admin/css/just-tips-public.ts"
   ],
   "authors": [
     "support@nativecode.com"
@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "jquery": "^2.2.4",
-    "tooltipster": "^3.3.0"
+    "tooltipster": "^3.3.0",
+    "angular": "^1.5.6"
   }
 }

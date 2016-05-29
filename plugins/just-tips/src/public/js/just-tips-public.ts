@@ -1,13 +1,14 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 import {} from 'jquery';
 
-(function ($: JQueryStatic) {
-    $(function () {
+(function ($) {
+    'use strict';
 
+    $(function () {
         let tips: JQuery = $('.just-tips');
         tips.each((tip) => {
             $(tip).show();
         });
-
     });
-})(<JQueryStatic>window['jQuery']);
+
+})(jQuery);
