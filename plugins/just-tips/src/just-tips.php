@@ -8,20 +8,20 @@
 * registers the activation and deactivation functions, and defines a function
 * that starts the plugin.
 *
-* @link              https://www.nativecode.com
+* @link              {{plugin.title.package}}
 * @since             1.0.0
-* @package           Just_Tips
+* @package           {{plugin.title.package}}
 *
 * @wordpress-plugin
-* Plugin Name:       Just Tips
-* Plugin URI:        https://github.com/nativecode-dev/wordpress
-* Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
-* Version:           1.0.0
+* Plugin Name:       {{plugin.title.display}}
+* Plugin URI:        {{npm.homepage}}
+* Description:       {{npm.description}}
+* Version:           {{npm.version}}
 * Author:            NativeCode
-* Author URI:        https://www.nativecode.com
+* Author URI:        {{npm.homepage}}
 * License:           GPL-2.0+
 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
-* Text Domain:       just-tips
+* Text Domain:       {{npm.name}}
 * Domain Path:       /languages
 */
 

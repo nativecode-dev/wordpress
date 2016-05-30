@@ -5,6 +5,8 @@
   "clean": {
     "globs": [
       "dist",
+      "etc",
+      "logs",
       "typings"
     ],
     "options": {
@@ -44,19 +46,12 @@
     "target": "plugin.min.js"
   },
   "globs": [
-    ".bowerrc",
-    ".npmrc",
     "bower.json",
     "config.json",
     "gulpfile.js",
     "package.json",
     "typings.json"
   ],
-  "gulp": {
-    "globs": [
-      "gulpfile.js"
-    ]
-  },
   "html": {
     "globs": "src/**/*.html"
   },
@@ -74,10 +69,16 @@
       "src/**/*.php"
     ]
   },
+  "plugin": {
+    "title": {
+      "display": "Just Tips",
+      "name": "just-tips",
+      "package": "Just_Tips"
+    }
+  },
   "ts": {
     "globs": [
-      "src/admin/js/**/*.ts",
-      "src/public/js/**/*.ts"
+      "src/**/*.ts"
     ],
     "lint": {
       "configuration": {
@@ -93,10 +94,12 @@
     "options": {
       "allowJs": false,
       "module": "commonjs",
+      "sourceMap": true,
       "target": "es5"
     },
     "target": [
-      "src/**/js/*-{admin,public}.ts"
+      "src/**/just-tips-admin.ts",
+      "src/**/just-tips-public.ts"
     ],
     "typings": {
       "globs": [
@@ -118,8 +121,11 @@
     ],
     "include": [
       "dist/**/*.css",
+      "dist/**/*.gif",
+      "dist/**/*.{jpg,jpeg}",
       "dist/**/*.js",
       "dist/**/*.php",
+      "dist/**/*.png",
       "!**/external/**/*"
     ]
   }
