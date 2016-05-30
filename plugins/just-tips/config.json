@@ -121,11 +121,17 @@
     ],
     "include": [
       "dist/**/*.css",
+      "dist/**/*.eot",
       "dist/**/*.gif",
       "dist/**/*.{jpg,jpeg}",
       "dist/**/*.js",
+      "dist/**/*.svg",
+      "dist/**/*.ttf",
       "dist/**/*.php",
       "dist/**/*.png",
+      "dist/**/*.woff",
+      "dist/**/*.woff2",
+      "!**/example/**/*",
       "!**/external/**/*"
     ]
   }

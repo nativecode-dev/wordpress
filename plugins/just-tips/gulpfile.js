@@ -169,6 +169,11 @@ gulp.task('clean', () => {
     .pipe(use.clean($.clean.options))
     .pipe(use.debug({ title: 'clean:' }))
 })
+gulp.task('clean:full', ['clean'], () => {
+  return gulp.src('node_modules')
+    .pipe(use.clean($.clean.options))
+    .pipe(use.debug({ title: 'clean:' }))
+})
 gulp.task('build', ['typings'], () => gulp.start(['wiredep']))
 gulp.task('watch', ['watch:reload'])
 gulp.task('watch:rebuild', () => {
