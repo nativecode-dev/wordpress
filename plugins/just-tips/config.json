@@ -67,13 +67,19 @@
   "php": {
     "globs": [
       "src/**/*.php"
-    ]
+    ],
+    "templates": {
+      "wiredep": "wp_enqueue_{{type}}( '{{name}}', plugin_dir_url( __FILE__ ) . '{{path}}', array( {{dependencies}} ), $this->version, 'all' );"
+    }
   },
   "plugin": {
+    "authorpage": "https://www.nativecode.com",
+    "homepage": "https://www.nativecode.com/wordpress/just-tips",
     "title": {
       "display": "Just Tips",
       "name": "just-tips",
-      "package": "Just_Tips"
+      "package": "Just_Tips",
+      "php": "just_tips"
     }
   },
   "ts": {

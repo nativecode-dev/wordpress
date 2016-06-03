@@ -1,29 +1,17 @@
-// Gulp restart when gulpfile is changed
-var gulp = require('gulp'),
-  spawn = require('child_process').spawn
+var gulp = require('gulp-build-tasks')(require('gulp'))
 
-gulp.task('gulp-autoreload', function () {
-  // Store current process if any
-  var p
-
-  gulp.watch('gulpfile.js', spawnChildren);
-  // Comment the line below if you start your server by yourslef anywhere else
-  spawnChildren()
-
-  function spawnChildren(e) {
-    if (p) {
-      p.kill()
-    }
-
-    p = spawn('gulp.cmd', ['build'], { stdio: 'inherit' })
+gulp.build({
+  js: {
+    build: src => src.pipe(gulp.dest('dist')),
+    src: ['src/**/*.js']
   }
 })
 
-gulp.task('build', function () {
-  // Your stuff here with build
-  // Moreover, it's a good idea to have livereload if necessary
-  return gulp.src('index.js')
-    .pipe(gulp.dest('dist'))
-})
+gulp.reload({
+  'gulpfile.json': [],
+  'package.json': ['build'],
+  'src/**/*.js': ['build:js']
+}, ['build'])
 
-gulp.task('default', ['build', 'gulp-autoreload'])
+gulp.task('default', ['build'])
+gulp.task('watch', ['build', 'watch:reload'])

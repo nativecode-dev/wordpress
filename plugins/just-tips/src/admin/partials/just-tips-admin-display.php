@@ -14,3 +14,7 @@
 ?>
 
   <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+
+  <div id="just-tips-admin" class="just-tips" ng-app="">
+    <h1>{{plugin.title.display}}</h1>
+  </div>

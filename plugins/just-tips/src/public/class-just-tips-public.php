@@ -55,19 +55,6 @@ class Just_Tips_Public {
     }
 
     /**
-    * Register the stylesheets for the public-facing side of the site.
-    *
-    * @since    1.0.0
-    */
-    public function enqueue_styles() {
-
-        /* bower:css */
-        /* endbower */
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/just-tips-public.css', array(), $this->version, 'all' );
-
-    }
-
-    /**
     * Register the JavaScript for the public-facing side of the site.
     *
     * @since    1.0.0
@@ -80,4 +67,17 @@ class Just_Tips_Public {
 
     }
 
+
+    /**
+    * Register the stylesheets for the public-facing side of the site.
+    *
+    * @since    1.0.0
+    */
+    public function enqueue_styles() {
+
+        /* bower:css */
+        /* endbower */
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/just-tips-public.css', array(), $this->version, 'all' );
+
+    }
 }

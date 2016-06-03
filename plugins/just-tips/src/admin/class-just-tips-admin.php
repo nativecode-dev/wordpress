@@ -55,19 +55,6 @@ class Just_Tips_Admin {
     }
 
     /**
-    * Register the stylesheets for the admin area.
-    *
-    * @since    1.0.0
-    */
-    public function enqueue_styles() {
-
-        /* bower:css */
-        /* endbower */
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/just-tips-admin.css', array(), $this->version, 'all' );
-
-    }
-
-    /**
     * Register the JavaScript for the admin area.
     *
     * @since    1.0.0
@@ -77,6 +64,19 @@ class Just_Tips_Admin {
         /* bower:js */
         /* endbower */
         wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/just-tips-admin.js', array( 'jquery' ), $this->version, false );
+
+    }
+
+    /**
+    * Register the stylesheets for the admin area.
+    *
+    * @since    1.0.0
+    */
+    public function enqueue_styles() {
+
+        /* bower:css */
+        /* endbower */
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/just-tips-admin.css', array(), $this->version, 'all' );
 
     }
 

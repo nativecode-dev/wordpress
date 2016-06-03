@@ -8,20 +8,20 @@
 * registers the activation and deactivation functions, and defines a function
 * that starts the plugin.
 *
-* @link              {{plugin.title.package}}
+* @link              {{plugin.homepage}}
 * @since             1.0.0
 * @package           {{plugin.title.package}}
 *
 * @wordpress-plugin
 * Plugin Name:       {{plugin.title.display}}
-* Plugin URI:        {{npm.homepage}}
+* Plugin URI:        {{plugin.homepage}}
 * Description:       {{npm.description}}
 * Version:           {{npm.version}}
-* Author:            NativeCode
-* Author URI:        {{npm.homepage}}
+* Author:            {{npm.author}}
+* Author URI:        {{plugin.authorpage}}
 * License:           GPL-2.0+
 * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
-* Text Domain:       {{npm.name}}
+* Text Domain:       {{plugin.title.name}}
 * Domain Path:       /languages
 */
 
@@ -72,4 +72,5 @@ function run_just_tips() {
     $plugin->run();
 
 }
+
 run_just_tips();
