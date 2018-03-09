@@ -1,6 +1,0 @@
-{
-    "directory": "dist/components",
-    "resolvers": [
-        "bower-shrinkwrap-resolver"
-    ]
-}

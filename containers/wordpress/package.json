@@ -1,7 +1,7 @@
 {
-  "name": "@natco/just-tips",
+  "name": "@natco/wordpress",
   "version": "1.0.0",
-  "description": "Provides various types of tooltips that can be used anywhere within your WordPress site. You can use shortcodes to embed video, images, or URLs in pages, posts, etc.",
+  "description": "",
   "main": "build.js",
   "repository": {
     "type": "git",
@@ -25,6 +25,8 @@
   "homepage": "https://github.com/nativecode-dev/wordpress#readme",
   "devDependencies": {},
   "scripts": {
-    "build": "echo build"
+    "build": "sh docker-build.sh",
+    "clean": "sh docker-clean.sh",
+    "push": "sh docker-push.sh"
   }
 }

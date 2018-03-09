@@ -1,0 +1,5 @@
+FROM ubuntu:latest
+RUN apt-get update
+RUN apt-get install bash-completion
+RUN apt-get autoclean
+RUN apt-get autoremove

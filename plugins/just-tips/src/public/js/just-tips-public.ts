@@ -1,5 +1,4 @@
-/// <reference path="../../../typings/index.d.ts" />
-import {} from 'jquery';
+import 'jquery';
 
 (function ($) {
     'use strict';

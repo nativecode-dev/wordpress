@@ -1,6 +1,19 @@
+.htaccess
+.vscode/
+
+artifacts/
+cache/
+components/
+dist/
+etc/
+lib/
+logs/
+node_modules/
+typings/
+
 *.log
 *.swp
-.htaccess
+
 sitemap.xml
 sitemap.xml.gz
 wp-config.php
@@ -14,14 +27,5 @@ wp-content/uploads/
 wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
 
-/readme.html
-/license.txt
-
-artifacts/
-cache/
-components/
-dist/
-etc/
-logs/
-node_modules/
-typings/
+readme.html
+license.txt

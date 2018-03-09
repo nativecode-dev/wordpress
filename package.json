@@ -1,0 +1,45 @@
+{
+	"name": "wordpress",
+	"private": true,
+	"version": "1.0.0",
+	"devDependencies": {
+		"@types/chai": "^4.1.2",
+		"@types/mocha": "^2.2.48",
+		"chai": "^4.1.2",
+		"coveralls": "^3.0.0",
+		"mocha": "^5.0.1",
+		"nyc": "^11.4.1",
+		"typescript": "^2.7.2"
+	},
+	"nyc": {
+		"all": true,
+		"exclude": [
+			"node_modules",
+			"packages/*/src/**/*.spec.ts"
+		],
+		"extension": [
+			".ts"
+		],
+		"include": [
+			"packages/*/src/**/*.ts"
+		],
+		"instrument": true,
+		"report-dir": ".cache/coverage",
+		"reporter": "text",
+		"sourceMap": true,
+		"temp-directory": ".cache/nyc"
+	},
+	"scripts": {
+		"build": "lerna bootstrap && lerna run build",
+		"prebuild": "yarn",
+		"clean": "rimraf .cache && lerna run clean",
+		"lint": "tslint --project tsconfig.json --config tslint.json",
+		"test": "cross-env DEBUG= nyc mocha --opts mocha.opts",
+		"pretest": "learn run build",
+		"docker-push": "lerna run push --scope=@natco/wordpress"
+	},
+	"workspaces": [
+		"containers/*",
+		"plugins/*"
+	]
+}
