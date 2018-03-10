@@ -1,0 +1,8 @@
+{
+  "name": "@natco/demo-netcore",
+  "description": "Simple ASP.NET Core application",
+  "scripts": {
+    "build": "docker build -t --rm demo-netcore .",
+    "start": "docker run --rm demo-netcore:latest"
+  }
+}
